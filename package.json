@@ -1,0 +1,19 @@
+{
+  "name": "mail-summarizer-worker",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev",
+    "start": "wrangler dev"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20251231.0",
+    "typescript": "^5.9.3",
+    "wrangler": "^4.54.0"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "marked": "^17.0.1"
+  }
+}

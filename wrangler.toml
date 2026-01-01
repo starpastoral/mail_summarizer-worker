@@ -1,0 +1,13 @@
+name = "mail-summarizer"
+main = "src/index.ts"
+compatibility_date = "2024-02-08"
+
+# Vars that will be available in the worker
+[vars]
+# API_KEY will be set via `wrangler secret put API_KEY` or in the dashboard for security
+# But for development ease, we can keep it here if not sensitive, OR better, instruct user to set it.
+# The user had it hardcoded in Python, so I will add a placeholder or ask them to set it.
+# For now, I will NOT hardcode it here to be safe and use env vars.
+
+[observability]
+enabled = true
