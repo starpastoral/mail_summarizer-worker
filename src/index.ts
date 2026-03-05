@@ -51,7 +51,46 @@ const CSS_STYLE = `
     src: local('MXiangHeHeiSCPro-Heavy'), local('M XiangHe Hei SC Pro Heavy'), local('M 翔鹤黑体 SC Pro Heavy');
     font-weight: 800;
   }
+
+    /* --- 筑紫明朝字重偏移映射 --- */
+
+  @font-face {
+    font-family: 'FZFWZhuZiMincho-Custom';
+    /* 400 (Regular) 映射到 Book*/
+    src: local('FZFW-ZhuZiMinchoS-M--GB1-0'), local('FZFW ZhuZi MinchoS_M');
+    font-weight: 400;
+  }
+
+  @font-face {
+    font-family: 'FZFWZhuZiMincho-Custom';
+    src: local('FZFW-ZhuZiMinchoS-RB--GB1-0'), local('FZFW ZhuZi MinchoS_RB');
+    font-weight: 500;
+  }
     
+  @font-face {
+    font-family: 'FZFWZhuZiMincho-Custom';
+    src: local('FZFW-ZhuZiMinchoS-D--GB1-0'), local('FZFW ZhuZi MinchoS_D');
+    font-weight: 600;
+  }
+    
+  @font-face {
+    font-family: 'FZFWZhuZiMincho-Custom';
+    src: local('FZFW-ZhuZiMinchoS-B--GB1-0'), local('FZFW ZhuZi MinchoS_B');
+    font-weight: 700;
+  }
+    
+  @font-face {
+    font-family: 'FZFWZhuZiMincho-Custom';
+    src: local('FZFW-ZhuZiMinchoS-E--GB1-0'), local('FZFW ZhuZi MinchoS_E');
+    font-weight: 800;
+  }
+    
+  @font-face {
+    font-family: 'FZFWZhuZiMincho-Custom';
+    src: local('FZFW-ZhuZiMinchoS-H--GB1-0'), local('FZFW ZhuZi MinchoS_H');
+    font-weight: 900;
+  }
+
   /* --- 字体栈应用 --- */
   :root {
     --font-sans:
@@ -62,7 +101,8 @@ const CSS_STYLE = `
       "Noto Sans SC",
       sans-serif;
     --font-serif:
-      "Source Serif 4",
+      "Lyon Text Trial",
+      "FZFWZhuZiMincho-Custom",
       "FZPingXianYaSongS-R-GB",
       "FZPINGXYSFW--GB1-0",
       "HYXuanSong",
@@ -79,6 +119,10 @@ const CSS_STYLE = `
       --text-secondary: #65635E;
       --accent-color: #D85E4B;
     }
+    
+    body {
+      -webkit-font-smoothing: antialiased; /* 深色模式下开启灰度抗锯齿，防止文字变粗发光 */
+    }
   }
 
   body {
@@ -89,7 +133,7 @@ const CSS_STYLE = `
     line-height: 1.5;
     margin: 0;
     padding: 20px;
-    -webkit-font-smoothing: antialiased;/* 抗锯齿 */
+    -webkit-font-smoothing: auto; /* 浅色模式下依赖 macOS 默认次像素渲染，增加宋体扎实感 */
     letter-spacing: 0.015em; 
   }
 
@@ -173,7 +217,7 @@ async function sha256(message: string) {
 function getModel(apiKey: string): GenerativeModel {
   if (!cachedModel) {
     const genAI = new GoogleGenerativeAI(apiKey);
-    cachedModel = genAI.getGenerativeModel({ model: "gemini-3-flash-preview" }, { apiVersion: "v1beta" });
+    cachedModel = genAI.getGenerativeModel({ model: "gemini-3.1-flash-lite-preview" }, { apiVersion: "v1beta" });
   }
   return cachedModel;
 }
